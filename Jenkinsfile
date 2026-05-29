@@ -2,36 +2,15 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK17'
-        maven 'Maven3'
+        maven 'Maven'
+        jdk 'JDK21'
     }
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/username/java-app.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'mvn clean package'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
-        stage('Archive') {
-            steps {
-                archiveArtifacts artifacts: 'target/*.jar'
-            }
-        }
     }
 }
-
